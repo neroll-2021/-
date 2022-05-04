@@ -29,4 +29,8 @@ bool removeStudentByID(Tree * ptree);
 
 bool removeStudentByName(Tree * ptree);
 
+bool modifyStudent(Tree * ptree);
+
+void showStudentNum(Tree * ptree);
+
 #endif // FUNCTION_HPP_INCLUDED

@@ -40,6 +40,12 @@ int main(void)
         case '7':
             removeStudentByID(&tree);
             break;
+        case '8':
+            modifyStudent(&tree);
+            break;
+        case '9':
+            showStudentNum(&tree);
+            break;
         default:
             printf("switching error in main.\n");
             break;

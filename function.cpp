@@ -44,7 +44,7 @@ char getChoice(void)
 {
     char choice = getchar();
 
-    while (strchr("12345678q", choice) == NULL)
+    while (strchr("123456789q", choice) == NULL)
     {
         eatline();
         printf("请输入1,2,3,4,5,6,7,8 或 q\n");
@@ -206,7 +206,7 @@ static double getScore(void)
 {
     double score;
     bool isValid;
-    while (!(isValid = scanf("%lf", &score) == 1)
+    while (!((isValid = scanf("%lf", &score)) == 1)
             || !isInBound(score))
     {
         if (!isValid)
@@ -464,5 +464,15 @@ bool modifyStudent(Tree * ptree)
         cur->student.englishScore = score;
         printf("修改成功!\n");
         return true;
+    }
+}
+
+void showStudentNum(Tree * ptree)
+{
+    if (ptree->size == 0)
+        printf("当前还没有学生\n");
+    else
+    {
+        printf("当前学生人数为: %d \n", ptree->size);
     }
 }
