@@ -173,6 +173,7 @@ bool addStudents(Tree * ptree, Node *** list)
                 free(*list);
             *list = makeStudentListSortedByScore(ptree);
             counter = 0;
+            writeToFile(ptree, *list);
         }
     }
     if (counter % 5 != 0)
@@ -180,12 +181,13 @@ bool addStudents(Tree * ptree, Node *** list)
         if (*list != NULL)
             free(*list);
         *list = makeStudentListSortedByScore(ptree);
+        writeToFile(ptree, *list);
     }
     //************************************
     //puts("eeeeeeeeee");
     //assert(ptree->size == counter);
     //printf("tree size=%d\n",ptree->size);
-
+/*
     for (int i=0;i<ptree->size;i++)
     {
         //printf("i=%d  ",i);
@@ -196,7 +198,7 @@ bool addStudents(Tree * ptree, Node *** list)
                ((*list)[i])->student.englishScore,
                getTotalScore(&(((*list)[i])->student)),
                getRank(ptree,&(((*list)[i])->student),*list));
-    }
+    }*/
     //************************************
     return true;
 }
@@ -393,6 +395,7 @@ bool removeStudentByID(Tree * ptree, Node *** list)
         if (*list == NULL)
             free(*list);
         *list = makeStudentListSortedByScore(ptree);
+        writeToFile(ptree, *list);
         return true;
     }
     else
@@ -425,6 +428,7 @@ bool removeStudentByName(Tree * ptree, Node *** list)
         if (*list == NULL)
             free(*list);
         *list = makeStudentListSortedByScore(ptree);
+        writeToFile(ptree, *list);
         return true;
     }
     else
@@ -480,5 +484,52 @@ void showStudentNum(Tree * ptree)
     else
     {
         printf("当前学生人数为: %d \n", ptree->size);
+    }
+}
+
+void writeToFile(Tree * ptree, Node ** list)
+{
+    FILE * fp;
+    if ((fp = fopen("students.txt", "w+")) == NULL)
+    {
+        fprintf(stderr, "cannot open file 'students.txt'\n");
+        exit(EXIT_FAILURE);
+    }
+    fprintf(fp, "%d\n", ptree->size);
+    for (int i = 0; i < ptree->size; i++)
+    {
+        fprintf(fp, "%s %s %.0lf %.0lf %.0lf\n",
+                list[i]->student.id, list[i]->student.name,
+                list[i]->student.chineseScore,
+                list[i]->student.mathScore,
+                list[i]->student.englishScore);
+    }
+    if (fclose(fp) != 0)
+    {
+        fprintf(stderr, "cannot close file 'students.txt'\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
+void readFromFile(Tree * ptree, Node ** list)
+{
+    FILE * fp;
+    if ((fp = fopen("students.txt", "r")) == NULL)
+    {
+        fprintf(stderr, "cannot open file 'students.txt'\n");
+        exit(EXIT_FAILURE);
+    }
+    fscanf(fp, "%*d");
+    Student temp;
+    for (int i = 0; i < ptree->size; i++)
+    {
+        fscanf(fp, "%s %s %lf %lf %lf", temp.id, temp.name,
+               &temp.chineseScore, &temp.mathScore, &temp.englishScore);
+        list[i] = insertReturnNodePointer(ptree, &temp);
+    }
+    if (fclose(fp) != 0)
+    {
+        fprintf(stderr, "cannot close file 'students.txt'\n");
+        exit(EXIT_FAILURE);
     }
 }

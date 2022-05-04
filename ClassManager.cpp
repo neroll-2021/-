@@ -401,6 +401,53 @@ bool insert(Tree * ptree, Student * student)
     return true;
 }
 
+/**
+ * 在树中添加一个学生，若学生已经存在，则不做任何操作
+ * @param ptree 指向树的指针
+ * @param student 要添加的学生的信息
+ * @return 若添加成功，则返回新添加的结点，若添加失败，
+ *        如学生已经存在等，返回NULL
+ * @version 0.1.0
+ * @date 2022-05-01
+ * @author Neroll
+ */
+Node * insertReturnNodePointer(Tree * ptree, Student * student)
+{
+    bool findInTree = false;
+    int insertPos = -1;
+    Node * parentNode = NULL;
+    if (ptree->IDRoot == NULL)
+    {
+        Node * newNode = makeNode(student);
+        ptree->IDRoot = newNode;
+        ptree->nameRoot = newNode;
+        ptree->size++;
+        return newNode;
+    }
+    searchPos(ptree->IDRoot, &findInTree, &insertPos, student->id,
+              parentNode, ID_TREE);
+    if (findInTree)
+        return NULL;
+    Node * newNode = makeNode(student);
+    if (insertPos == LEFT)
+        parentNode->IDNodeInfo.left = newNode;
+    else
+        parentNode->IDNodeInfo.right = newNode;
+    newNode->IDNodeInfo.parent = parentNode;
+    fixAfterInsertionInID(ptree, newNode);
+    searchPos(ptree->nameRoot, &findInTree, &insertPos, student->name,
+              parentNode, NAME_TREE);
+    if (findInTree) return NULL;
+    if (insertPos == LEFT)
+        parentNode->nameNodeInfo.left = newNode;
+    else
+        parentNode->nameNodeInfo.right = newNode;
+    newNode->nameNodeInfo.parent = parentNode;
+    fixAfterInsertionInName(ptree, newNode);
+    ptree->size++;
+    return newNode;
+}
+
 bool TreeIsEmpty(Tree * ptree)
 {
     return ptree->size == 0;

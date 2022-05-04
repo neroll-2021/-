@@ -84,4 +84,6 @@ Node ** makeStudentListSortedByScore(Tree * ptree);
 
 void destroyTree(Tree * ptree);
 
+Node * insertReturnNodePointer(Tree * ptree, Student * student);
+
 #endif // CLASSMANAGER_HPP_INCLUDED

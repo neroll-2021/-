@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1651646435 source:d:\work\coursedesign\classmanager\classmanager\main.cpp
+1651655030 source:d:\work\coursedesign\classmanager\classmanager\main.cpp
 	<iostream>
 	"function.hpp"
 	<stdio.h>
@@ -7,7 +7,7 @@
 	<ctype.h>
 	<conio.h>
 
-1651649152 source:d:\work\coursedesign\classmanager\classmanager\classmanager.cpp
+1651655030 source:d:\work\coursedesign\classmanager\classmanager\classmanager.cpp
 	"ClassManager.hpp"
 	<stdlib.h>
 	<ctype.h>
@@ -15,7 +15,7 @@
 	<stdio.h>
 	<math.h>
 
-1651568803 d:\work\coursedesign\classmanager\classmanager\classmanager.hpp
+1651655065 d:\work\coursedesign\classmanager\classmanager\classmanager.hpp
 
 1651649536 source:d:\work\coursedesign\classmanager\classmanager\function.cpp
 	"function.hpp"
@@ -25,6 +25,6 @@
 	<stdlib.h>
 	<assert.h>
 
-1651646458 d:\work\coursedesign\classmanager\classmanager\function.hpp
+1651654383 d:\work\coursedesign\classmanager\classmanager\function.hpp
 	"ClassManager.hpp"
 
