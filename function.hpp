@@ -35,6 +35,6 @@ void showStudentNum(Tree * ptree);
 
 void writeToFile(Tree * ptree, Node ** list);
 
-void readFromFile(Tree * ptree, Node ** list);
+void readFromFile(Tree * ptree, Node *** list);
 
 #endif // FUNCTION_HPP_INCLUDED

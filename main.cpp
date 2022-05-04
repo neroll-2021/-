@@ -14,7 +14,7 @@ int main(void)
     initTree(&tree);
     StudentList list = NULL;
     //showAllStudentsByID(&tree, list);
-    readFromFile(&tree, list);
+    readFromFile(&tree, &list);
     while ((choice = showMainMenu()) != 'q')
     {
         switch (choice)

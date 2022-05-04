@@ -971,3 +971,15 @@ void destroyTree(Tree * ptree)
     ptree->IDRoot = ptree->nameRoot = NULL;
     ptree->size = 0;
 }
+
+bool initList(Node *** list, int size)
+{
+    *list = (Node **)malloc(sizeof(Node *)*size);
+    if (*list == NULL)
+    {
+        fprintf(stderr, "cannot malloc memory in %d in ClassManager.cpp\n",
+                __LINE__);
+        exit(EXIT_FAILURE);
+    }
+    return true;
+}

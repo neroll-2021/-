@@ -86,4 +86,6 @@ void destroyTree(Tree * ptree);
 
 Node * insertReturnNodePointer(Tree * ptree, Student * student);
 
+bool initList(Node *** list, int size);
+
 #endif // CLASSMANAGER_HPP_INCLUDED
