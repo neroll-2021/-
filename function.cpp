@@ -185,7 +185,7 @@ bool addStudents(Tree * ptree, Node *** list)
     //puts("eeeeeeeeee");
     //assert(ptree->size == counter);
     //printf("tree size=%d\n",ptree->size);
-    /*
+
     for (int i=0;i<ptree->size;i++)
     {
         //printf("i=%d  ",i);
@@ -196,7 +196,7 @@ bool addStudents(Tree * ptree, Node *** list)
                ((*list)[i])->student.englishScore,
                getTotalScore(&(((*list)[i])->student)),
                getRank(ptree,&(((*list)[i])->student),*list));
-    }*/
+    }
     //************************************
     return true;
 }

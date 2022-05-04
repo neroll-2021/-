@@ -787,8 +787,9 @@ static void makeList(Node * root, Node ** list, int &index)
 static int compareStudentByScore(Node * a, Node * b)
 {
     if (fabs(getTotalScore(&(a->student))
-        - getTotalScore(&(b->student))) > 0.005)
-        return getTotalScore(&(b->student)) - getTotalScore(&(a->student));
+        - getTotalScore(&(b->student))) > 0.1)
+        return (int)(getTotalScore(&(b->student))
+                - getTotalScore(&(a->student)));
     return strcmp(a->student.id, b->student.id);
 }
 
@@ -833,7 +834,7 @@ static void swapNodePointer(Node ** a, Node ** b)
  * @date 2022-05-03
  * @author Neroll
  */
-static void subSort(Node ** list, int left, int right,
+static int subSort(Node ** list, int left, int right,
                     int (*comparator)(Node * a, Node * b))
 {
     int base = right;
@@ -842,9 +843,13 @@ static void subSort(Node ** list, int left, int right,
     for (i = left, j = left; j < right; j++)
     {
         if (comparator(list[j], list[base]) < 0)
-            swapNodePointer(&list[i++], &list[j]);
+        {
+            swapNodePointer(&list[i], &list[j]);
+            i++;
+        }
     }
     swapNodePointer(&list[i], &list[base]);
+    return i;
 }
 
 /**
@@ -861,10 +866,9 @@ static void quickSort(Node ** list, int left, int right,
 {
     if (left < right)
     {
-        subSort(list, left, right, comparator);
-        int mid = (left + right) >> 1;
-        quickSort(list, left, mid - 1, comparator);
-        quickSort(list, mid + 1, right, comparator);
+        int i = subSort(list, left, right, comparator);
+        quickSort(list, left, i - 1, comparator);
+        quickSort(list, i + 1, right, comparator);
     }
 }
 
@@ -876,30 +880,23 @@ int getRank(Tree * ptree, Student * student, Node ** list)
     while (left <= right)
     {
         mid = (left + right) >> 1;
-        //printf("left=%d  mid=%d  right=%d\n",left,mid,right);
-        // execute
         if (getTotalScore(&(list[mid]->student)) < getTotalScore(student))
         {
-            //puts("sssss");
             right = mid - 1;
 
         }
         else if (getTotalScore(&(list[mid]->student)) > getTotalScore(student))
         {
-            //puts("dddddd");
             left = mid + 1;
         }
         else if (fabs(getTotalScore(&(list[mid]->student))
                 - getTotalScore(student)) < 1e-5)
         {
-            //puts("aaaaa");
             break;
         }
-        //else puts("other");
     }
     int rank = mid + 1;
     bool move = false;
-    // puts("exe");
     while (mid > 0
            && fabs(getTotalScore(&(list[mid - 1]->student))
            - getTotalScore(student)) < 1e-6)
@@ -907,9 +904,7 @@ int getRank(Tree * ptree, Student * student, Node ** list)
         mid--;
         rank--;
         move = true;
-        //puts("moving"); // not execute
     }
-    //puts("getRank no problem");
     return rank;
 }
 
