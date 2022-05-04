@@ -25,4 +25,8 @@ bool searchStudentByName(Tree * ptree, Node ** list);
 
 bool searchStudentByID(Tree * ptree, Node ** list);
 
+bool removeStudentByID(Tree * ptree);
+
+bool removeStudentByName(Tree * ptree);
+
 #endif // FUNCTION_HPP_INCLUDED

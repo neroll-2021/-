@@ -324,19 +324,6 @@ bool searchStudentByName(Tree * ptree, Node ** list)
     Node * node;
     if ((node = searchByName(ptree, name)) != NULL)
     {
-        /*
-        while (strcmp(node->nameNodeInfo.left->student.name,
-                      node->student.name) == 0 ||
-               strcmp(node->nameNodeInfo.right->student.name,
-                      node->student.name) == 0)
-        {
-            if (strcmp(node->nameNodeInfo.left->student.name,
-                       node->student.name) == 0)
-            {
-                node = node->nameNodeInfo.left;
-            }
-
-        }*/
         printTableHeader();
         printStudentInfo(ptree, &(node->student), list);
         printLine();
@@ -374,6 +361,64 @@ bool searchStudentByID(Tree * ptree, Node ** list)
         printTableHeader();
         printStudentInfo(ptree, &(node->student), list);
         printLine();
+        return true;
+    }
+    else
+    {
+        printf("没有找到该学生\n");
+        return false;
+    }
+}
+
+bool removeStudentByID(Tree * ptree)
+{
+    if (ptree->size == 0)
+    {
+        printf("当前还没有学生\n");
+        return false;
+    }
+    printf("请输入学生的学号(输入q退出):\n");
+    char id[ID_LENGTH];
+    s_gets(id, ID_LENGTH);
+    if (id[0]=='q') return false;
+    while (!IDIsValid(id))
+    {
+        printf("学号不合法，请重试:\n");
+        s_gets(id, ID_LENGTH);
+        if (id[0] == 'q') return false;
+    }
+    if (removeByID(ptree, id))
+    {
+        printf("删除成功!\n");
+        return true;
+    }
+    else
+    {
+        printf("没有找到该学生\n");
+        return false;
+    }
+}
+
+bool removeStudentByName(Tree * ptree)
+{
+    if (ptree->size == 0)
+    {
+        printf("当前还没有学生\n");
+        return false;
+    }
+    printf("请输入学生的姓名(输入q退出):\n");
+    char name[NAME_LENGTH];
+    s_gets(name, NAME_LENGTH);
+    if (name[0]=='q') return false;
+    while (!nameIsValid(name))
+    {
+        printf("姓名不合法，请重试:\n");
+        s_gets(name, NAME_LENGTH);
+        if (name[0] == 'q') return false;
+    }
+    if (removeByName(ptree, name))
+    {
+        printf("删除成功!\n");
         return true;
     }
     else

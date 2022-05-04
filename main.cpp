@@ -34,6 +34,12 @@ int main(void)
         case '5':
             searchStudentByID(&tree, list);
             break;
+        case '6':
+            removeStudentByName(&tree);
+            break;
+        case '7':
+            removeStudentByID(&tree);
+            break;
         default:
             printf("switching error in main.\n");
             break;
