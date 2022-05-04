@@ -35,10 +35,10 @@ int main(void)
             searchStudentByID(&tree, list);
             break;
         case '6':
-            removeStudentByName(&tree);
+            removeStudentByName(&tree, &list);
             break;
         case '7':
-            removeStudentByID(&tree);
+            removeStudentByID(&tree, &list);
             break;
         case '8':
             modifyStudent(&tree);

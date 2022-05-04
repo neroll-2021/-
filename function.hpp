@@ -25,9 +25,9 @@ bool searchStudentByName(Tree * ptree, Node ** list);
 
 bool searchStudentByID(Tree * ptree, Node ** list);
 
-bool removeStudentByID(Tree * ptree);
+bool removeStudentByID(Tree * ptree, Node *** list);
 
-bool removeStudentByName(Tree * ptree);
+bool removeStudentByName(Tree * ptree, Node *** list);
 
 bool modifyStudent(Tree * ptree);
 

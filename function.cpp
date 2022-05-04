@@ -370,7 +370,7 @@ bool searchStudentByID(Tree * ptree, Node ** list)
     }
 }
 
-bool removeStudentByID(Tree * ptree)
+bool removeStudentByID(Tree * ptree, Node *** list)
 {
     if (ptree->size == 0)
     {
@@ -390,6 +390,9 @@ bool removeStudentByID(Tree * ptree)
     if (removeByID(ptree, id))
     {
         printf("删除成功!\n");
+        if (*list == NULL)
+            free(*list);
+        *list = makeStudentListSortedByScore(ptree);
         return true;
     }
     else
@@ -399,7 +402,7 @@ bool removeStudentByID(Tree * ptree)
     }
 }
 
-bool removeStudentByName(Tree * ptree)
+bool removeStudentByName(Tree * ptree, Node *** list)
 {
     if (ptree->size == 0)
     {
@@ -419,6 +422,9 @@ bool removeStudentByName(Tree * ptree)
     if (removeByName(ptree, name))
     {
         printf("删除成功!\n");
+        if (*list == NULL)
+            free(*list);
+        *list = makeStudentListSortedByScore(ptree);
         return true;
     }
     else

@@ -594,6 +594,7 @@ bool removeByID(Tree * ptree, char * id)
         free(cur);
         ptree->IDRoot = NULL;
         ptree->nameRoot = NULL;
+        ptree->size--;
         return true;
     }
     removeNodeInID(ptree, cur);
@@ -632,6 +633,7 @@ bool removeByName(Tree * ptree, char * name)
     {
         free(cur);
         ptree->IDRoot = ptree->nameRoot = NULL;
+        ptree->size--;
         return true;
     }
     if (cur == NULL) return false;
