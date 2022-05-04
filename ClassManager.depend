@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1651636480 source:d:\work\coursedesign\classmanager\classmanager\main.cpp
+1651636523 source:d:\work\coursedesign\classmanager\classmanager\main.cpp
 	<iostream>
 	"function.hpp"
 	<stdio.h>

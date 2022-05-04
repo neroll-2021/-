@@ -427,3 +427,42 @@ bool removeStudentByName(Tree * ptree)
         return false;
     }
 }
+
+bool modifyStudent(Tree * ptree)
+{
+    if (ptree->size == 0)
+    {
+        printf("当前还没有学生\n");
+        return false;
+    }
+    printf("请输入学生的学号(输入q退出):\n");
+    char id[ID_LENGTH];
+    s_gets(id, ID_LENGTH);
+    if (id[0] == 'q') return false;
+    while (!IDIsValid(id))
+    {
+        printf("学号不合法，请重试:\n");
+        s_gets(id, ID_LENGTH);
+        if (id[0] == 'q') return false;
+    }
+    Node *  cur = searchByID(ptree, id);
+    if (cur == NULL)
+    {
+        printf("找不到该学生\n");
+        return false;
+    }
+    else
+    {
+        printf("请输入学生的语文分数:\n");
+        double score = getScore();
+        cur->student.chineseScore = score;
+        printf("请输入学生的数学分数:\n");
+        score = getScore();
+        cur->student.mathScore = score;
+        printf("请输入学生的英语分数:\n");
+        score = getScore();
+        cur->student.englishScore = score;
+        printf("修改成功!\n");
+        return true;
+    }
+}
